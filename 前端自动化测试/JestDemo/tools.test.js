@@ -133,8 +133,13 @@ const { sum, sub, mul, div } = require("./tools");
 //   expect(() => compileCode()).toThrow(/error/);
 // });
 
-const arr = ["张三"];
-test("上面的数组不包含某一项", () => {
-  // toEqual(参数中属于一段描述：期望数组中不包含arr中的值)
-  expect(["李四", "王五"]).toEqual(expect.not.arrayContaining(arr));
+// const arr = ["张三"];
+// test("上面的数组不包含某一项", () => {
+//   // toEqual(参数中属于一段描述：期望数组中不包含arr中的值)
+//   expect(["李四", "王五"]).toEqual(expect.not.arrayContaining(arr));
+// });
+
+const obj = {name:"张三"};
+test("对象不包含上面的键值对",()=>{
+expect({name:"李四"}).toEqual(expect.not.objectContaining(obj));
 });
