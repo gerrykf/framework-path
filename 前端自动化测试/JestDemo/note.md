@@ -1,3 +1,18 @@
+- [Jest 快速入门](#jest-快速入门)
+  - [测试用例的分组](#测试用例的分组)
+  - [匹配器](#匹配器)
+    - [常用匹配器](#常用匹配器)
+    - [布尔相关匹配器](#布尔相关匹配器)
+    - [字符串相关的匹配器](#字符串相关的匹配器)
+    - [数组相关匹配器](#数组相关匹配器)
+    - [异常匹配器](#异常匹配器)
+    - [非对称匹配器](#非对称匹配器)
+    - [部分源码](#部分源码)
+  - [生命周期方法](#生命周期方法)
+    - [重复性的生命周期方法](#重复性的生命周期方法)
+    - [一次性的生命周期方法](#一次性的生命周期方法)
+    - [在分组中添加生命周期函数](#在分组中添加生命周期函数)
+
 # Jest 快速入门
 
 - 初始化项目
@@ -225,7 +240,7 @@ Time:        0.545 s, estimated 1 s
 Ran all test suites.
 ```
 
-## 布尔相关匹配器
+### 布尔相关匹配器
 
 > 一般来讲 运行结果的到的是一个布尔值，使用布尔值相关匹配器的时候一般是无需传参的。
 
@@ -267,7 +282,7 @@ test("无参数匹配器", () => {
   > 因`浮点数有一个舍入误差` 只要编程语言中使用了`IEE754`这个标准 就无法精确做浮点数的计算 所以这里无法使用`toBe`做浮点数匹配
 - toBeClose(期望接近的值，小数位数) 解决了上面浮点数无法匹配的问题
 
-## 字符串相关的匹配器
+### 字符串相关的匹配器
 
 `toMatch`可以检查 字符串是否和一个正则表达式 能够匹配上。
 
@@ -278,7 +293,7 @@ test("字符串相关匹配器", () => {
 });
 ```
 
-## 数组相关匹配器
+### 数组相关匹配器
 
 一个常见的需求就是 需要判断一个数组中是否包含某一项，这个时候可以使用`toContain`。
 
@@ -296,7 +311,7 @@ test("数组相关匹配器", () => {
 });
 ```
 
-## 异常匹配器
+### 异常匹配器
 
 需求一般是 我们测试某个函数调用之后 它是否会抛出这个异常
 
@@ -319,7 +334,7 @@ test("异常相关匹配器", () => {
 });
 ```
 
-## 非对称匹配器
+### 非对称匹配器
 
 上面举例的匹配器都属于对称匹配器 例如：
 
@@ -349,7 +364,7 @@ test("对象不包含上面的键值对", () => {
 });
 ```
 
-## 部分源码
+### 部分源码
 
 在源码中，所有的匹配器都放在了一个名为 matchers 的对象里面
 
@@ -392,3 +407,171 @@ const expect = () => {
   return expectation;
 };
 ```
+
+## 生命周期方法
+
+在 jest 中，生命周期方法大致分为两种：
+
+- 重复性的生命周期方法
+  - beforeEach
+  - afterEach
+- 一次性的生命周期方法
+  - beforeAll
+  - afterAll
+    上面所罗列的生命周期方法，也是全局方法，不需要引入，直接使用。
+
+### 重复性的生命周期方法
+
+所谓重复性的生命周期方法，就是指这些方法会被添加到每一个测试用例的前后.
+
+```js
+beforeEach(() => {
+  console.log("全局的BeforeEach");
+});
+
+afterEach(() => {
+  console.log("全局的AfterEach");
+});
+
+test("测试加法", () => {
+  expect(sum(1, 2)).toBe(3);
+  console.log("\x1b[31m%s\x1b[0m", "测试加法");
+});
+
+test("测试减法", () => {
+  expect(sub(5, 3)).toBe(2);
+  console.log("\x1b[31m%s\x1b[0m", "测试减法");
+});
+
+/**
+ * it函数就是test函数的别名
+ */
+it("测试乘法", () => {
+  expect(mul(2, 6)).toBe(12);
+  console.log("\x1b[31m%s\x1b[0m", "测试乘法");
+});
+
+it("测试除法", () => {
+  expect(div(100, 2)).toBe(50);
+  console.log("\x1b[31m%s\x1b[0m", "测试除法");
+});
+```
+
+上面的代码 为每一个测试用例添加了生命周期方法，beforeEach 和 afterEach 会在每一个测试用例的前后执行。
+
+<img src="./生命周期.png" style="width:800px;"/>
+
+### 一次性的生命周期方法
+
+对应的方法：
+
+- beforeAll
+- afterAll
+
+```js
+beforeAll(() => {
+  console.log("全局的BeforeAll");
+});
+
+afterAll(() => {
+  console.log("全局的AafterAll");
+});
+
+beforeEach(() => {
+  console.log("全局的BeforeEach");
+});
+
+afterEach(() => {
+  console.log("全局的AfterEach");
+});
+
+test("测试加法", () => {
+  expect(sum(1, 2)).toBe(3);
+  console.log("\x1b[31m%s\x1b[0m", "测试加法");
+});
+
+test("测试减法", () => {
+  expect(sub(5, 3)).toBe(2);
+  console.log("\x1b[31m%s\x1b[0m", "测试减法");
+});
+
+/**
+ * it函数就是test函数的别名
+ */
+it("测试乘法", () => {
+  expect(mul(2, 6)).toBe(12);
+  console.log("\x1b[31m%s\x1b[0m", "测试乘法");
+});
+
+it("测试除法", () => {
+  expect(div(100, 2)).toBe(50);
+  console.log("\x1b[31m%s\x1b[0m", "测试除法");
+});
+```
+
+<img src="./一次性生命周期.png" style="width:800px;"/>
+
+### 在分组中添加生命周期函数
+
+如果测试用例比较多，我们可以使用 describe 来进行分组，在一个分组里面也可以书写生命周期方法，但是在分组中的生命周期方法会变为一个局部的生命周期方法，仅对该组测试用例有效，而且这里还涉及到了一个顺序的问题。
+
+```
+beforeAll(() => {
+  console.log("\x1b[31m%s\x1b[0m", "全局的BeforeAll");
+});
+
+afterAll(() => {
+  console.log("\x1b[31m%s\x1b[0m", "全局的AafterAll");
+});
+
+beforeEach(() => {
+  console.log("\x1b[31m%s\x1b[0m", "全局的BeforeEach");
+});
+
+afterEach(() => {
+  console.log("\x1b[31m%s\x1b[0m", "全局的AfterEach");
+});
+
+describe("第一组", () => {
+  beforeEach(() => {
+    console.log("\x1b[31m%s\x1b[0m", "分组的BeforeEach");
+  });
+
+  afterEach(() => {
+    console.log("\x1b[31m%s\x1b[0m", "分组的AfterEach");
+  });
+
+  test("测试加法", () => {
+    expect(sum(1, 2)).toBe(3);
+    console.log("\x1b[31m%s\x1b[0m", "测试加法");
+  });
+
+  test("测试减法", () => {
+    expect(sub(5, 3)).toBe(2);
+    console.log("\x1b[31m%s\x1b[0m", "测试减法");
+  });
+});
+
+describe("第二组", () => {
+  beforeEach(() => {
+    console.log("\x1b[31m%s\x1b[0m", "分组的BeforeEach");
+  });
+
+  afterEach(() => {
+    console.log("\x1b[31m%s\x1b[0m", "分组的AfterEach");
+  });
+
+  it("测试乘法", () => {
+    expect(mul(2, 6)).toBe(12);
+    console.log("\x1b[31m%s\x1b[0m", "测试乘法");
+  });
+
+  it("测试除法", () => {
+    expect(div(100, 2)).toBe(50);
+    console.log("\x1b[31m%s\x1b[0m", "测试除法");
+  });
+});
+
+```
+如果既有全局的beforeEach又有分组内部的beforeEach,那么是先执行全局的beforeEach,再执行分组的beforeEach,如果是全局afterEach以及分组的afterEach,那么执行的顺序正好和beforeEach相反。
+<img src="./分组生命周期.png"/>
