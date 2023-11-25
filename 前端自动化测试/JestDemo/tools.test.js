@@ -183,57 +183,69 @@ const { sum, sub, mul, div } = require("./tools");
 //   console.log("\x1b[31m%s\x1b[0m", "测试除法");
 // });
 
-beforeAll(() => {
-  console.log("\x1b[31m%s\x1b[0m", "全局的BeforeAll");
-});
+// beforeAll(() => {
+//   console.log("\x1b[31m%s\x1b[0m", "全局的BeforeAll");
+// });
 
-afterAll(() => {
-  console.log("\x1b[31m%s\x1b[0m", "全局的AafterAll");
-});
+// afterAll(() => {
+//   console.log("\x1b[31m%s\x1b[0m", "全局的AafterAll");
+// });
 
-beforeEach(() => {
-  console.log("\x1b[31m%s\x1b[0m", "全局的BeforeEach");
-});
+// beforeEach(() => {
+//   console.log("\x1b[31m%s\x1b[0m", "全局的BeforeEach");
+// });
 
-afterEach(() => {
-  console.log("\x1b[31m%s\x1b[0m", "全局的AfterEach");
-});
+// afterEach(() => {
+//   console.log("\x1b[31m%s\x1b[0m", "全局的AfterEach");
+// });
 
-describe("第一组", () => {
-  beforeEach(() => {
-    console.log("\x1b[31m%s\x1b[0m", "分组的BeforeEach");
-  });
+// describe("第一组", () => {
+//   beforeEach(() => {
+//     console.log("\x1b[31m%s\x1b[0m", "分组的BeforeEach");
+//   });
 
-  afterEach(() => {
-    console.log("\x1b[31m%s\x1b[0m", "分组的AfterEach");
-  });
+//   afterEach(() => {
+//     console.log("\x1b[31m%s\x1b[0m", "分组的AfterEach");
+//   });
 
-  test("测试加法", () => {
-    expect(sum(1, 2)).toBe(3);
-    console.log("\x1b[31m%s\x1b[0m", "测试加法");
-  });
+//   test("测试加法", () => {
+//     expect(sum(1, 2)).toBe(3);
+//     console.log("\x1b[31m%s\x1b[0m", "测试加法");
+//   });
 
-  test("测试减法", () => {
-    expect(sub(5, 3)).toBe(2);
-    console.log("\x1b[31m%s\x1b[0m", "测试减法");
-  });
-});
+//   test("测试减法", () => {
+//     expect(sub(5, 3)).toBe(2);
+//     console.log("\x1b[31m%s\x1b[0m", "测试减法");
+//   });
+// });
 
-describe("第二组", () => {
-  beforeEach(() => {
-    console.log("\x1b[31m%s\x1b[0m", "分组的BeforeEach");
-  });
+// describe("第二组", () => {
+//   beforeEach(() => {
+//     console.log("\x1b[31m%s\x1b[0m", "分组的BeforeEach");
+//   });
 
-  afterEach(() => {
-    console.log("\x1b[31m%s\x1b[0m", "分组的AfterEach");
-  });
+//   afterEach(() => {
+//     console.log("\x1b[31m%s\x1b[0m", "分组的AfterEach");
+//   });
 
-  it("测试乘法", () => {
+//   test.only("测试乘法", () => {
+//     expect(mul(2, 6)).toBe(12);
+//     console.log("\x1b[31m%s\x1b[0m", "测试乘法");
+//   });
+
+//   it("测试除法", () => {
+//     expect(div(100, 2)).toBe(50);
+//     console.log("\x1b[31m%s\x1b[0m", "测试除法");
+//   });
+// });
+
+describe("测试只有某一个测试用例执行", () => {
+  test("测试乘法", () => {
     expect(mul(2, 6)).toBe(12);
     console.log("\x1b[31m%s\x1b[0m", "测试乘法");
   });
 
-  it("测试除法", () => {
+  it.only("测试除法", () => {
     expect(div(100, 2)).toBe(50);
     console.log("\x1b[31m%s\x1b[0m", "测试除法");
   });
