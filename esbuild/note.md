@@ -136,11 +136,62 @@ esbuild.build({
 
   ReactDOM.createRoot(document.getElementById("root")).render(<App />);
   ```
+
   - 运行打包
     `node .\esbuild.config.mjs`
   - 运行项目
+
     - 安装 http-server
       `npm i http-server -D`
 
       ` http-server -o -c-1`
+
     - `npx serve public`
+
+  - 使用 esbuild 构建工具中的开发服务器 与 热更新
+
+    ```js
+    (async () => {
+      const ctx = await esbuild.context({
+        // 入口文件列表
+        entryPoints: ["src/App.tsx", "src/index.html"],
+        // 输出文件
+        outdir: "/dist",
+        // 是否需要打包
+        bundle: true,
+        // 是否需要压缩
+        minify: false,
+        // 是否需要 sourcemap
+        sourcemap: true,
+        // 指定语言版本和目标浏览器版本
+        target: ["es2020", "chrome58", "firefox57", "safari11"],
+        // 是否需要打包生成元信息
+        metafile: true,
+        // 指定 loader
+        loader: {
+          ".html": "copy",
+          // ".jpg": "dataurl",
+          ".module.css": "local-css",
+        },
+        plugins: [inlineImage(), time()],
+      });
+
+      await ctx.watch();
+      ctx
+        .serve({
+          port: 8080,
+          host: "localhost",
+          servedir: "./dist",
+        })
+        .then((server) => {
+          console.log(
+            `server is running at http://${server.host}:${server.port}`
+          );
+        });
+    })();
+    ```
+
+## 将 react 工程 webpack 替换成 esbuild
+
+- 创建 react 工程 `npx create-react-app project-name`
+-
