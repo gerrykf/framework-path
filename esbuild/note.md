@@ -191,7 +191,68 @@ esbuild.build({
     })();
     ```
 
-## 将 react 工程 webpack 替换成 esbuild
+## react 工程 使用 esbuild
 
-- 创建 react 工程 `npx create-react-app project-name`
--
+- 创建 react 工程 `npx create-react-app project-name` -根目录添加 `esbuild.config.mjs`文件
+
+```js
+import esbuild from "esbuild";
+import inlineImage from "esbuild-plugin-inline-image";
+import time from "esbuild-plugin-time";
+
+(async () => {
+  const ctx = await esbuild.context({
+    // 入口文件列表
+    entryPoints: ["src/index.js"],
+    // 输出目录
+    outdir: "/public",
+    // 是否需要打包
+    bundle: true,
+    // 是否需要压缩
+    minify: false,
+    // 是否需要sourcemap
+    sourcemap: true,
+    // 指定语言版本和目标浏览器版本
+    target: ["es2020", "chrome58", "firefox57", "safari11"],
+    // 是否需要打包生成元信息
+    metafile: true,
+    // 指定loader
+    loader: {
+      ".js": "jsx",
+      ".html": "copy",
+      // ".jpg": "dataurl",
+      ".module.css": "local-css",
+    },
+    plugins: [inlineImage(), time()],
+  });
+
+  await ctx.watch();
+
+  ctx
+    .serve({
+      port: 8080,
+      host: "localhost",
+      servedir: "./public",
+    })
+    .then((server) => {
+      console.log(`server is running at http://${server.host}:${server.port}`);
+    });
+})();
+```
+
+- 修改根目录/public/index.html 文件内容
+  - 删除 `%PUBLIC_URL%` 替换为正确路径
+  - 添加 script 引入`index.js`文件
+  ```html
+  <script src="index.js"></script>
+  <script>
+    new EventSource("/esbuild").addEventListener("change", () =>
+      location.reload()
+    );
+  </script>
+  ```
+- scr/App.js 导入 React
+
+```js
+import React from "react";
+```
