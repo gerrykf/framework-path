@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true, // 允许使用es6的模块语法
+        "allowSyntheticDefaultImports": true, // 允许从没有设置默认导出的模块中默认导入
+        "jsx": "react-jsx", // 这里的react-jsx代表react的jsx语法
+        "baseUrl": "./", // 这里的./代表当前目录
+        "paths": {
+            "@/*": [ // 这里的@符号代表src目录
+                "src/*"
+            ]
+        }
+    }
+}
