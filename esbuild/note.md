@@ -67,3 +67,80 @@ npx esbuild .\src\TestComp.ts --outfile=dist/TestComp.js --bundle --loader:.ts=t
       }
     }
     ```
+
+## 使用 esbuild 配置打包 react 工程
+
+- 项目工程目录下创建`esbuild.config.mjs`文件
+
+```json
+import esbuild from "esbuild";
+
+esbuild.build({
+  // 入口文件列表
+  entryPoints: ["src/App.tsx"],
+  // 输出文件列表
+  outdir: "./public/dist/App.js",
+  // 是否需要打包
+  bundle: true,
+  // 是否需要压缩
+  minify: false,
+  // 是否需要sourcemap
+  sourcemap: true,
+  // 指定语言版本和目标浏览器版本
+  target: ["es2020", "chrome58", "firefox57", "safari11"],
+  // 指定loader
+  loader: {
+    ".jpg": "dataurl",
+  },
+});
+```
+
+- 运行打包
+  `node .\esbuild.config.mjs`
+
+- 增加 index.html 文件运行
+
+  - 创建 html 文件 项目根目录/public/dist/`index.html`文件
+
+  ```html
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+    </head>
+    <body>
+      <div id="root"></div>
+    </body>
+    <script src="./App.js"></script>
+  </html>
+  ```
+
+  - 添加 App.tsx 文件内容
+
+  ```js
+  import React from "react";
+  import ReactDOM from "react-dom/client";
+  import Comp1 from "./components/Comp1";
+  import Comp2 from "./components/Comp2";
+
+  const App = () => (
+    <div>
+      <h1>Hello world</h1>
+      <Comp1 />
+      <Comp2 />
+    </div>
+  );
+
+  ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  ```
+  - 运行打包
+    `node .\esbuild.config.mjs`
+  - 运行项目
+    - 安装 http-server
+      `npm i http-server -D`
+
+      ` http-server -o -c-1`
+    - `npx serve public`

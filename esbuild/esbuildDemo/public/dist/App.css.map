@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/components/comp.css", "../../src/components/comps.module.css", "../../src/style.css"],
+  "sourcesContent": ["ul {\r\n  list-style: none;\r\n}\r\nli {\r\n  border: 1px solid #666;\r\n  margin: 8px;\r\n}\r\n", ".title{\r\n    color: rgb(226, 236, 84);\r\n}", "body {\r\n  color: #000;\r\n  font-size: 26px;\r\n}\r\n\r\n.title {\r\n  color: #f00;\r\n  font-size: 40px;\r\n}\r\n"],
+  "mappings": ";AAAA;AACE,cAAY;AACd;AACA;AACE,UAAQ,IAAI,MAAM;AAClB,UAAQ;AACV;;;ACNA,CAACA;AACG,SAAO,IAAI,GAAG,EAAE,GAAG,EAAE;AACzB;;;ACFA;AACE,SAAO;AACP,aAAW;AACb;AAEA,CAAC;AACC,SAAO;AACP,aAAW;AACb;",
+  "names": ["title"]
+}

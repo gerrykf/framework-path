@@ -24433,7 +24433,7 @@
   // src/App.tsx
   var import_jsx_runtime3 = __toESM(require_jsx_runtime());
   var App = () => /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("h1", { className: "title", children: "Hello world!!!1231" }),
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("h1", { className: "title", children: "Hello world" }),
     /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Comp1_default, {}),
     /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Comp2_default, {})
   ] });

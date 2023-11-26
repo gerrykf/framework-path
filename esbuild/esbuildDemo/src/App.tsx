@@ -1,12 +1,15 @@
 import React from "react";
-import * as ReactDOM from "react-dom";
-import img from "@/assets/0.jpg";
+import ReactDOM from "react-dom/client";
+import Comp1 from "./components/Comp1";
+import Comp2 from "./components/Comp2";
+import "./style.css";
 
-let HelloWorldComponent = () => (
+const App = () => (
   <div>
-    <h1>hello world</h1>
-    <img src={img} />
+    <h1 className="title">Hello world!!!1231</h1>
+    <Comp1 />
+    <Comp2 />
   </div>
 );
 
-console.log(HelloWorldComponent);
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);

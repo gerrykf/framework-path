@@ -1,0 +1,24 @@
+/* src/components/comp.css */
+ul {
+  list-style: none;
+}
+li {
+  border: 1px solid #666;
+  margin: 8px;
+}
+
+/* src/components/comps.module.css */
+.comps_title {
+  color: rgb(226, 236, 84);
+}
+
+/* src/style.css */
+body {
+  color: #000;
+  font-size: 26px;
+}
+.title {
+  color: #f00;
+  font-size: 40px;
+}
+/*# sourceMappingURL=App.css.map */
