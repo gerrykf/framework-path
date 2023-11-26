@@ -191,7 +191,7 @@ esbuild.build({
     })();
     ```
 
-## react 工程 使用 esbuild
+## react工程 **webpack**替换为**esbuild**
 
 - 创建 react 工程 `npx create-react-app project-name` -根目录添加 `esbuild.config.mjs`文件
 
