@@ -1,6 +1,11 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>{{ $t("about.title") }}</h1>
+    <br />
+    <h2>{{ $t("about.content") }}</h2>
+    <h2>
+      {{ $t("about.donations", { donations: $n(1234.567, "currency") }) }}
+    </h2>
   </div>
 </template>
 

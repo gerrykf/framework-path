@@ -1,0 +1,12 @@
+{
+  "home": {
+    "title": "Home",
+    "content": "This is home content",
+    "num-visits": "this page has not been visited yet:( | you are the {num}th visitor"
+  },
+  "about": {
+    "title": "About",
+    "content": "This is about content",
+    "donations": "Donations: {donations}"
+  }
+}

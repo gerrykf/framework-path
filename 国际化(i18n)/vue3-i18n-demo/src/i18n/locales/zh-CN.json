@@ -1,0 +1,12 @@
+{
+  "home": {
+    "title": "首页",
+    "content": "这是首页内容",
+    "num-visits": "暂时还没有访客:( | 你是第{num}位访客"
+  },
+  "about": {
+    "title": "关于",
+    "content": "这是关于内容",
+    "donations": "捐赠: {donations}"
+  }
+}
