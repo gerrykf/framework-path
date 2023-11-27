@@ -1,3 +1,13 @@
+- [**Esbuild**](#esbuild)
+  - [build Api](#build-api)
+    - [打包速度对比：](#打包速度对比)
+    - [esbuild 的缺点：](#esbuild-的缺点)
+    - [跟 webpack 的区别:](#跟-webpack-的区别)
+    - [esbuild 的使用](#esbuild-的使用)
+      - [打包压缩 react 工程](#打包压缩-react-工程)
+    - [使用 esbuild 配置打包 react 工程](#使用-esbuild-配置打包-react-工程)
+  - [react 工程 **webpack**替换为**esbuild**](#react-工程-webpack替换为esbuild)
+
 # **Esbuild**
 
 esbuild 的优点：
@@ -7,23 +17,37 @@ esbuild 的优点：
 - 支持 tree-shaking
 - 支持 jsx
 
-## 打包速度对比：
+## build Api
+
+```js
+const config = {};
+const ctx = esbuild.context(config);
+
+// 监听文件
+await ctx.watch();
+// 开发服务器
+await ctx.serve({});
+//重新打包
+await ctx.rebuild();
+```
+
+### 打包速度对比：
 
 - webpack: 2.5s
 - esbuild: 0.5s
 
-## esbuild 的缺点：
+### esbuild 的缺点：
 
 - 不支持 es5，所以需要 babel 转换
 
-## 跟 webpack 的区别:
+### 跟 webpack 的区别:
 
 - runtime
   > webpack: 会把所有的代码都打包到一个文中，包括 webpack 的 runtime，所以每次打包会生成一个新的 runtime，导致缓存失效
   >
   > esbuild: 会把所有的代码都打包到一个文中，但是不会打包 runtime，所以每次打包不会生成一个新的 runtime，导致缓存生效
 
-## esbuild 的使用
+### esbuild 的使用
 
 - 安装
   `npm i esbuild -D`
@@ -34,7 +58,7 @@ esbuild 的优点：
 - 代码压缩
   `npx esbuild .\src\index.ts --outdir=dist/ --bundle --minify`
 
-### 打包压缩 react 工程
+#### 打包压缩 react 工程
 
 ```js
 npx esbuild .\src\App.tsx --outfile=dist/App.js --bundle --minify
@@ -68,7 +92,7 @@ npx esbuild .\src\TestComp.ts --outfile=dist/TestComp.js --bundle --loader:.ts=t
     }
     ```
 
-## 使用 esbuild 配置打包 react 工程
+### 使用 esbuild 配置打包 react 工程
 
 - 项目工程目录下创建`esbuild.config.mjs`文件
 
@@ -191,7 +215,7 @@ esbuild.build({
     })();
     ```
 
-## react工程 **webpack**替换为**esbuild**
+## react 工程 **webpack**替换为**esbuild**
 
 - 创建 react 工程 `npx create-react-app project-name` -根目录添加 `esbuild.config.mjs`文件
 
